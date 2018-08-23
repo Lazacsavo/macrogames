@@ -11,7 +11,7 @@ local ump9_key = 4 -- UMP9 fegyverhez működik.
 local akm_key = 5 -- AKM és VECTOR fegyverhez működik.
 local m416_key = 8 -- M4 és QBZ fegyverhez működik.
 local m16a4_key = nil -- Jelenleg kikapcsolva --
-local scarl_key = nil -- Jelenleg kikapcsolva --
+local beryl_key = 10 -- Jelenleg kikapcsolva --
 local uzi_key = nil -- Jelenleg kikapcsolva --
 local set_off_key = 6 -- Mindent kikapcsoló gomb --
 
@@ -137,9 +137,9 @@ recoil_table["m416"] = {
     speed = 90,
 }
 
-recoil_table["scarl"] = {
-    basic={49,37,38,39,43,46,47,47,48,49,50,49,55,56,58,60},
-    basictimes = 1.2,
+recoil_table["beryl"] = {
+    basic={40,40,40,40,40,50,56.8},
+    basictimes = 0.7,
 
     full={44,28,32,40,44, 45,48,48,46,53, 54,56,58,57,56, 62},
     fulltimes = 0.89*0.75,
@@ -234,13 +234,13 @@ function recoil_value(_weapon,_duration)
     end
 	
     local weapon_recoil = recoil_table[_weapon][_mode][step]
-    --OutputLogMessage("weapon_recoil = %s\n", weapon_recoil)
+    OutputLogMessage("weapon_recoil = %s\n", weapon_recoil)
     
     local weapon_speed = 30
     if weapon_speed_mode then
         weapon_speed = recoil_table[_weapon]["speed"]
     end
-    --OutputLogMessage("weapon_speed = %s\n", weapon_speed)
+    --utputLogMessage("weapon_speed = %s\n", weapon_speed)
 
     local weapon_basictimes = recoil_table[_weapon]["basictimes"]
     local weapon_fulltimes = recoil_table[_weapon]["fulltimes"]
@@ -342,9 +342,9 @@ function OnEvent(event, arg)
 		OutputLogMessage("UZI Bekapcsolva!")
 		Sleep(500)
 		ClearLog()
-    elseif (event == "MOUSE_BUTTON_PRESSED" and arg == scarl_key) then
-        current_weapon = "scarl"
-		OutputLogMessage("SCAR-L Bekapcsolva!")
+    elseif (event == "MOUSE_BUTTON_PRESSED" and arg == beryl_key) then
+        current_weapon = "beryl"
+		OutputLogMessage("Beryl M762 Bekapcsolva!")
 		Sleep(500)
 		ClearLog()
     elseif (event == "MOUSE_BUTTON_PRESSED" and arg == 1 and not IsModifierPressed(fast_loot_key)) then
