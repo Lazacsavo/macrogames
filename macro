@@ -10,8 +10,8 @@ local ump9_key = 4 -- UMP9 fegyverhez működik.
 local akm_key = 5 -- AKM és VECTOR fegyverhez működik.
 local m416_key = 8 -- M4 és QBZ fegyverhez működik.
 local m16a4_key = nil -- Jelenleg kikapcsolva --
-local beryl_key = 10 -- BERYL --
-local vector_key = 11 -- VECTOR --
+local beryl_key = 10 -- Jelenleg kikapcsolva --
+local vector_key = 11 -- Jelenleg kikapcsolva --
 local set_off_key = 6 -- Mindent kikapcsoló gomb --
 
 ---- Auto Shoot gomb ----
@@ -82,7 +82,7 @@ recoil_table["ump9"] = {
 }
 
 recoil_table["akm"] = {
-    basic={40,37,38,41.8,41.8,41.8,41.8,41.8,45.4,49.4,49.4,49.4,49.4,49.4,58,58},
+    basic={37,37,38,41.8,41.8,41.8,41.8,41.8,45.4,49.4,49.4,49.4,49.4,49.4,58,58},
     basictimes = 0.78,
 	
     full={56,40,38,44,48,55,56,61,65,65,67,68,67,71,74,70,65,66,72,74,72,71,70,70,70,72,74,76,72},
@@ -193,8 +193,7 @@ recoil_table["none"] = {
 
 --------------------------------------------------------------------
 -------------------------- Function --------------------------------
---------------------------------------------------------------------
-
+-------------------------------------------------------------------
 function convert_sens(unconvertedSens) 
     return 0.002 * math.pow(10, unconvertedSens / 50)
 end
@@ -233,7 +232,8 @@ function recoil_value(_weapon,_duration)
     end
 	
     local weapon_recoil = recoil_table[_weapon][_mode][step]
-    OutputLogMessage("weapon_recoil = %s\n", weapon_recoil)
+	x, y = GetMousePosition();
+	OutputLogMessage("MouseMoveTo (%d, %d)\n", x, y)
     
     local weapon_speed = 30
     if weapon_speed_mode then
@@ -310,6 +310,10 @@ function OnEvent(event, arg)
         ReleaseKey(fire_key)
         ReleaseMouseButton(1)
     end
+
+if (event == "MOUSE_BUTTON_PRESSED" and arg == 3) then
+	ClearLog()
+end
 
     if (event == "MOUSE_BUTTON_PRESSED" and arg == set_off_key) then
         current_weapon = "none"
@@ -409,5 +413,6 @@ function OnEvent(event, arg)
         if not IsKeyLockOn(lighton_key) then
         PressAndReleaseKey(lighton_key)
         end
-    end
+ 	
+	end	
 end
