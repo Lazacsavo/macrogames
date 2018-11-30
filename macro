@@ -2,14 +2,14 @@
 ----------------        Basic Setting       ------------------------------
 --------------------------------------------------------------------------
  ---- key bind ----
- local ump9_key = 4
-local akm_key = 5
-local m16a4_key = 7
-local m416_key = 8
-local scarl_key = nil
-local uzi_key = nil
-local qbz_key = 11
-local set_off_key = 6
+ local ump9_key = 4 ---- UMP G5
+local akm_key = 5 ---- AKM G5
+local m16a4_key = 7 ---- M16 G7
+local m416_key = 8 ---- M4 G8
+local scarl_key = nil --- SCARL NINCS
+local uzi_key = nil --- UZI NINCS
+local qbz_key = 11 --- QBZ G11, Balra görgő
+local set_off_key = 6 --- Mindent kikapcsol g6, célkeresztes gomb
  ---- keyboard ---- Only Support logitech G Keyboard
  local ump9_gkey = 1  ---1 is use F1.
 local akm_gkey = nil
